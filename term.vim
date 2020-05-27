@@ -1,5 +1,6 @@
 if has('nvim')
   :tnoremap <C-w> <C-\><C-n><C-w>
+  :tnoremap <Esc><Esc> <C-\><C-n>
 endif 
   augroup terminal_settings
     autocmd!
