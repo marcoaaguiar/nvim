@@ -13,11 +13,11 @@ let g:DevIconsEnableFoldersOpenClose = 1
 highlight! link NERDTreeFlags NERDTreeDir
 
 " Remove expandable arrow
-let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
-let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
-let NERDTreeDirArrowExpandable = "\u00a0"
-let NERDTreeDirArrowCollapsible = "\u00a0"
-let NERDTreeNodeDelimiter = "\x07"
+" let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+" let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+" let NERDTreeDirArrowExpandable = "\u00a0"
+" let NERDTreeDirArrowCollapsible = "\u00a0"
+" let NERDTreeNodeDelimiter = "\x07"
 
 " Autorefresh on tree focus
 function! NERDTreeRefresh()
