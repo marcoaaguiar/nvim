@@ -43,6 +43,17 @@ Plug 'mgedmin/python-imports.vim'
 
 " Comment out lines
 Plug 'preservim/nerdcommenter'
+
+" Plug
+Plug 'kana/vim-arpeggio'
+
+" List of class and methods in file
+Plug 'majutsushi/tagbar'
+
+" Zoom in window
+Plug 'troydm/zoomwintab.vim'
+
+" Show ident lines
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
-"

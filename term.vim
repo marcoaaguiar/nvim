@@ -1,12 +1,14 @@
 if has('nvim')
   :tnoremap <C-w> <C-\><C-n><C-w>
   :tnoremap <Esc><Esc> <C-\><C-n>
+  :tnoremap <C-n> <down>
+  :tnoremap <C-e> <up>
 endif 
-  augroup terminal_settings
+augroup terminal_settings
     autocmd!
 
-    autocmd BufWinEnter,WinEnter term://* startinsert
-    autocmd BufLeave term://* stopinsert
+    " autocmd BufWinEnter,WinEnter term://* startinsert
+    " autocmd BufLeave term://* stopinsert
 
     " Ignore various filetypes as those will close terminal automatically
     " Ignore fzf, ranger, coc
@@ -14,4 +16,4 @@ endif
           \ if (expand('<afile>') !~ "fzf") && (expand('<afile>') !~ "ranger") && (expand('<afile>') !~ "coc") |
           \   call nvim_input('<CR>')  |
           \ endif
-  augroup END
+augroup END
