@@ -5,9 +5,9 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
 set nu
 set nowrap
+set ignorecase
 set smartcase
 set noswapfile
 set nobackup
@@ -21,6 +21,7 @@ let using_neovim = has('nvim')
 let using_vim = !using_neovim
 let fancy_symbols_enabled = 1
 set scrolloff=4
+filetype plugin on 
 
 " highlight yanked text
 augroup highlight_yank
@@ -38,3 +39,18 @@ augroup END
 
 set splitbelow
 set splitright
+
+" Auto reload modified files
+autocmd BufEnter,FocusGained * checktime
+
+" Folding
+if has('folding')
+  if has('windows')
+    let &fillchars='vert: '           " less cluttered vertical window separators
+  endif
+  set foldmethod=indent               " not as cool as syntax, but faster
+  set foldlevelstart=99               " start unfolded
+endif
+
+" Multi-mode mappings (Normal, Visual, Operating-pending modes).
+noremap Y y$

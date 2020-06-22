@@ -1,0 +1,222 @@
+global !p
+import px.snippets
+endglobal
+ 
+global !p
+def make_jumper(snip):
+	px.snippets.make_jumper(snip)
+
+def jump_after_one_character(snip):
+	if px.snippets.get_jumper_text(snip) and len(px.snippets.get_jumper_text(snip))==1:
+		px.snippets.advance_jumper(snip)
+endglobal
+
+
+# Contexts
+global !p
+texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z', 'AmsA', 'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG', 'AmsAS', 'AmsBS', 'AmsCS', 'AmsDS', 'AmsES', 'AmsFS', 'AmsGS' ]]
+texIgnoreMathZones = ['texMathText']
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+ignore = texIgnoreMathZoneIds[0]
+
+def math():
+	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+	try:
+		first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
+		return first != ignore
+	except StopIteration:
+		return False
+
+def px_math(snip):
+	if math():
+		return px.snippets.make_context(snip)
+	return False
+ 
+endglobal
+
+# environments
+snippet sbq "Subequations" iA
+\begin{subequations}
+	\begin{align}
+		$1
+	\end{align}
+\end{subequations}
+endsnippet
+
+snippet mk "Inline math" iA
+$$1$
+endsnippet
+
+snippet ref "ref" i
+\ref{$1}
+endsnippet
+
+snippet eqref "eqref" iA
+\eqref{eq:$1}
+endsnippet
+
+snippet label "label" iA
+\label{$1}
+endsnippet
+ 
+# math snippets
+context "math()"
+snippet label "label" iA
+\label{eq:$1}
+endsnippet
+ 
+context "math()"
+snippet intvl "Time interval [t_0, t_f]" iA
+[t_0, t_f]
+endsnippet
+
+context "math()"
+snippet \intT "Integral from t_0 to t_f" iA
+\int_{t_0}^{t_f}
+endsnippet
+
+context "math()"
+snippet sr "squared" iA
+^{2}
+endsnippet
+
+context "math()"
+snippet tr "transpose" iA
+^{T}
+endsnippet
+
+context "math()"
+snippet star "star" iA
+^*
+endsnippet
+
+context "math()"
+snippet cb "squared" iA
+^{3}
+endsnippet
+
+context "math()"
+snippet tf "t_f" iA
+t_f
+endsnippet
+
+context "math()"
+snippet t0 "t_0" iA
+t_0
+endsnippet
+
+
+context "px_math(snip)"
+post_jump "make_jumper(snip)"
+snippet ss "superscript" iA
+`!p jump_after_one_character(snip)
+`^{${1:}}
+endsnippet
+
+context "px_math(snip)"
+post_jump "make_jumper(snip)"
+snippet sb "subscript" iA
+`!p jump_after_one_character(snip)
+`_{${1:}}
+endsnippet
+
+# auto snippets
+context "px_math(snip)"
+post_jump "make_jumper(snip)"
+snippet rn "\mathbb{R}^{N_?}" iA
+`!p jump_after_one_character(snip)
+`\mathbb{R}^{N_${1:}}
+endsnippet
+
+context "math()"
+snippet frac "frac" iA
+\frac{$1}{$2}
+endsnippet
+
+context "math()"
+snippet // "Fraction" iA
+\\frac{$1}{$2}
+endsnippet
+
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+priority 1000
+context "math()"
+snippet '^.*\)/' "() Fraction" wrA
+`!p
+stripped = match.string[:-1]
+depth = 0
+i = len(stripped) - 1
+while True:
+	if stripped[i] == ')': depth += 1
+	if stripped[i] == '(': depth -= 1
+	if depth == 0: break;
+	i -= 1
+snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+`{$1}$0
+endsnippet
+ 
+context "math()"
+priority 10
+snippet "dot" "dot" riA
+\dot{$1}
+endsnippet
+
+priority 100
+context "math()"
+snippet "([\\]?[a-zA-Z]+)(dot)" "dot" riA
+\dot{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+context "math()"
+snippet "bar" "bar" riA
+\overline{$1}
+endsnippet
+
+priority 100
+context "math()"
+snippet "([\\]?[a-zA-Z]+)(bar)" "bar" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 0
+context "math()"
+snippet in "\in" wA
+\in
+endsnippet
+
+context "math()"
+snippet nu "\nu" wA
+\nu
+endsnippet
+
+context "math()"
+snippet to "\to" wA
+\to
+endsnippet
+
+context "math()"
+snippet partial "partial" wA
+\partial
+endsnippet
+
+context "math()"
+snippet lambda "\lambda" wA
+\lambda
+endsnippet
+
+context "math()"
+snippet delta "delta" wA
+\delta
+endsnippet
+
+context "math()"
+snippet Delta "delta" wA
+\Delta
+endsnippet
+
+

@@ -1,5 +1,6 @@
 " VIM Meta
 nnoremap <leader>vr :source $MYVIMRC<CR>
+nnoremap <leader>vs :source %<CR>
 nnoremap <leader>vc :e $MYVIMRC<CR>
 
 " Mapping for buffer movement
@@ -16,7 +17,7 @@ map <space> <leader>
 " noremap <space> <nop>
 
 " Map python autoimport
-map <F5> :ImportName<CR>
+map <leader>u :ImportName<CR>
 
 " clear search results
 nnoremap <silent> // :noh<CR>
@@ -25,7 +26,26 @@ nnoremap <silent> // :noh<CR>
 " autocmd BufWritePre *.py :%s/\s\+$//e
 
 " move through split
-nnoremap <C-N> <C-W><C-J>
-nnoremap <C-E> <C-W><C-K>
-nnoremap <C-I> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-Down> <C-W><C-J>
+nnoremap <C-Up> <C-W><C-K>
+nnoremap <C-Right> <C-W><C-L>
+nnoremap <C-Left> <C-W><C-H>
+
+" Create new line above and below
+nnoremap <S-A-o> O <Esc>
+nnoremap <A-o> o <Esc>
+" exit insert with 
+inoremap hh <Esc>
+
+" Fold on shift-tab
+nnoremap <s-tab> za
+
+" Show highlight group for word under cursor
+" nmap <C-S-T> :call <SID>SynStack()<CR>
+" function! <SID>SynStack()
+"   if !exists("*synstack")
+"       return
+"         endif
+"           echo map(synstack(line('.'), col('.')), 'synIDattr(v:val,
+"           "name")')
+"           endfunc

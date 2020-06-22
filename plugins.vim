@@ -11,6 +11,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Gruvbox theme
 Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -26,11 +27,11 @@ Plug 'junegunn/fzf.vim'
 " Completion from other opened files
 Plug 'Shougo/context_filetype.vim'
 
-" Surround
+" Surround an text element with (), [], ...
 Plug 'tpope/vim-surround'
 
 " Indent text object
-Plug 'michaeljsmith/vim-indent-object'
+" Plug 'michaeljsmith/vim-indent-object'
 
 " Git integration
 Plug 'tpope/vim-fugitive'
@@ -54,6 +55,41 @@ Plug 'majutsushi/tagbar'
 Plug 'troydm/zoomwintab.vim'
 
 " Show ident lines
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
+
+" Vimspector
+Plug 'puremourning/vimspector'
+
+" Git change marks
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
+
+" Latex
+Plug 'lervag/vimtex'
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
+
+" Smooth scrolling
+Plug 'psliwka/vim-smoothie'
+
+" Tips for improving vim movement
+if has('python3') && has('timers')
+    Plug 'AlphaMycelium/pathfinder.vim'
+else
+    echoerr 'pathfinder.vim is not supported on this Vim installation'
+endif
+
+" Track the engine.
+Plug 'SirVer/ultisnips'
+"
+" " Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+Plug 'reconquest/vim-pythonx'
+
+" Goyo (minimalistic view)
+Plug 'junegunn/goyo.vim'
 call plug#end()
+
 

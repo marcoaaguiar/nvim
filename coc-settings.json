@@ -10,12 +10,14 @@
     "json",
     "python"
   ],
+  "markdownlint.config": { "line_length": false },
   "python.jediEnabled": false,
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
     "--load-plugins=pylint_django",
     "--disable=C0116"
-  ],
-  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
+  ]
+  //"snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
+  //"snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
 }

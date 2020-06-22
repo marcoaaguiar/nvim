@@ -20,3 +20,12 @@ nmap ,F :Lines<CR>
 nmap ,wF :execute ":Lines " . expand('<cword>')<CR>
 " commands finder mapping
 nmap ,c :Commands<CR>
+
+" open buffers
+nmap ,b :Buffers<CR>
+
+
+set ttimeout
+set ttimeoutlen=0
+
+
