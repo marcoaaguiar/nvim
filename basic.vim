@@ -15,6 +15,7 @@ set undodir=~/.config/nvim/.undodir
 set undofile
 set incsearch
 set autoread
+set nostartofline
 
 set encoding=utf-8
 let using_neovim = has('nvim')

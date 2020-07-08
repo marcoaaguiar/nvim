@@ -38,8 +38,8 @@ nnoremap <c-w>k <c-w>n
 nnoremap <c-w>l <c-w>i
 
 " pentadactyl binds ctrl-h to history otherwise
-" map <c-h> <BS>
-" cmap <c-h> <BS>
+map <c-h> <BS>
+cmap <c-h> <BS>
 
 " this nerdtree mapping interferes with movement
 let g:NERDTreeMapOpenExpl = "j"

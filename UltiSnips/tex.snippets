@@ -7,7 +7,9 @@ def make_jumper(snip):
 	px.snippets.make_jumper(snip)
 
 def jump_after_one_character(snip):
-	if px.snippets.get_jumper_text(snip) and len(px.snippets.get_jumper_text(snip))==1:
+	if (px.snippets.get_jumper_text(snip) 
+			and len(px.snippets.get_jumper_text(snip))==1
+			and px.snippets.get_jumper_text(snip).isalnum()):
 		px.snippets.advance_jumper(snip)
 endglobal
 
@@ -24,7 +26,7 @@ def math():
 	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
 	try:
 		first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
-		return first != ignore
+		return first if first != ignore else False
 	except StopIteration:
 		return False
 
@@ -59,7 +61,15 @@ endsnippet
 snippet label "label" iA
 \label{$1}
 endsnippet
- 
+
+snippet ... "..." iA
+\dots
+endsnippet
+
+snippet ith "i-th" wA
+$i$-th
+endsnippet
+
 # math snippets
 context "math()"
 snippet label "label" iA
@@ -102,25 +112,20 @@ t_f
 endsnippet
 
 context "math()"
-snippet t0 "t_0" iA
-t_0
-endsnippet
-
-
-context "px_math(snip)"
-post_jump "make_jumper(snip)"
 snippet ss "superscript" iA
-`!p jump_after_one_character(snip)
-`^{${1:}}
+^{${1:}}
 endsnippet
 
-context "px_math(snip)"
-post_jump "make_jumper(snip)"
+context "math()"
 snippet sb "subscript" iA
-`!p jump_after_one_character(snip)
-`_{${1:}}
+_{${1:}}$2
 endsnippet
 
+context "math()"
+snippet "(\\label\{)?(?<!\_\{|\^\{)(\\[a-zA-Z0-9:]{2,}|(?<!\\)[a-zA-Z0-9:]+)([0-9ijk])" "subscript autobrackets" riA
+`!p snip.rv = f"{match.group(2)}_{{{match.group(3)}}}" if not match.group(1) else f"{match.group(1)}{match.group(2)}{match.group(3)}"`
+endsnippet
+	
 # auto snippets
 context "px_math(snip)"
 post_jump "make_jumper(snip)"
@@ -130,7 +135,7 @@ snippet rn "\mathbb{R}^{N_?}" iA
 endsnippet
 
 context "math()"
-snippet frac "frac" iA
+snippet "(?<!\\|[a-zA-Z])frac" "frac" rwA
 \frac{$1}{$2}
 endsnippet
 
@@ -139,6 +144,7 @@ snippet // "Fraction" iA
 \\frac{$1}{$2}
 endsnippet
 
+context "math()"
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
 \\frac{`!p snip.rv = match.group(1)`}{$1}$0
 endsnippet
@@ -161,7 +167,7 @@ endsnippet
  
 context "math()"
 priority 10
-snippet "dot" "dot" riA
+snippet "(?<!\\)dot" "dot" rA
 \dot{$1}
 endsnippet
 
@@ -169,6 +175,18 @@ priority 100
 context "math()"
 snippet "([\\]?[a-zA-Z]+)(dot)" "dot" riA
 \dot{`!p snip.rv=match.group(1)`}
+endsnippet
+
+context "math()"
+priority 10
+snippet "(?<!\\)hat" "hat" rA
+\widehat{$1}
+endsnippet
+
+priority 100
+context "math()"
+snippet "([\\]?[a-zA-Z]+)(hat)" "hat" riA
+\widehat{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 10
@@ -185,13 +203,8 @@ endsnippet
 
 priority 0
 context "math()"
-snippet in "\in" wA
-\in
-endsnippet
-
-context "math()"
-snippet nu "\nu" wA
-\nu
+snippet "(?<!\\|[a-zA-Z])in" "in" rwA
+`!p snip.rv = '\\'+ match.group(0)`
 endsnippet
 
 context "math()"
@@ -205,18 +218,32 @@ snippet partial "partial" wA
 endsnippet
 
 context "math()"
-snippet lambda "\lambda" wA
-\lambda
+snippet "(?<!\\)lambda" "lambda" rA
+`!p snip.rv = '\\'+ match.group(0)`
 endsnippet
 
 context "math()"
-snippet delta "delta" wA
-\delta
+snippet "(?<!\\)tau" "tau" rA
+`!p snip.rv = '\\'+ match.group(0)`
 endsnippet
 
 context "math()"
-snippet Delta "delta" wA
-\Delta
+snippet "(?<!\\)delta" "delta" rA
+`!p snip.rv = '\\'+ match.group(0)`
 endsnippet
 
+context "math()"
+snippet "(?<!\\)Delta" "Delta" rA
+`!p snip.rv = '\\'+ match.group(0)`
+endsnippet
+
+context "math()"
+snippet "(?<!\\)nu" "nu" rA
+`!p snip.rv = '\\'+ match.group(0)`
+endsnippet
+
+context "math()"
+snippet "(?<!\\)ell" "ell" rA
+`!p snip.rv = '\\'+ match.group(0)`
+endsnippet
 
