@@ -26,9 +26,10 @@ augroup tex_settings
     autocmd BufEnter *.tex :set wrap linebreak
     autocmd BufEnter *.tex :set scrolloff=10
 
+    autocmd FileType tex echo "Tex file"
     " $chang in $
-    autocmd FileType tex xmap <buffer> u$ <plug>(vimtex-i$)
-    autocmd FileType tex omap <buffer> u$ <plug>(vimtex-i$)
+    autocmd FileType tex xmap <buffer> i$ <plug>(vimtex-i$)
+    autocmd FileType tex omap <buffer> i$ <plug>(vimtex-i$)
      
     " change in env
     autocmd FileType tex xmap <buffer> ue <plug>(vimtex-ie)

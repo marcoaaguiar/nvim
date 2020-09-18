@@ -1,7 +1,13 @@
 global !p
 import px.snippets
 endglobal
- 
+
+global !p
+greek_upper = ['Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega']
+greek_lower = ['alpha','beta','gamma','delta','epsilon','zeta','eta','theta','iota','kappa','lambda','mu','nu','xi','omicron','pi','rho','sigma','tau','upsilon','phi','chi','psi','omega']
+greek_commands = [f"\\{greek}" for greek in greek_upper + greek_lower]
+endglobal
+
 global !p
 def make_jumper(snip):
 	px.snippets.make_jumper(snip)
@@ -38,12 +44,19 @@ def px_math(snip):
 endglobal
 
 # environments
-snippet sbq "Subequations" iA
+snippet sbq "Subequations" i
 \begin{subequations}
 	\begin{align}
-		$1
+		${1:${VISUAL}}
 	\end{align}
 \end{subequations}
+endsnippet
+
+context "math()"
+snippet bmat "bmatrix" 
+\begin{bmatrix}
+	${1:${VISUAL}}
+\end{bmatrix}
 endsnippet
 
 snippet mk "Inline math" iA
@@ -122,8 +135,8 @@ _{${1:}}$2
 endsnippet
 
 context "math()"
-snippet "(\\label\{)?(?<!\_\{|\^\{)(\\[a-zA-Z0-9:]{2,}|(?<!\\)[a-zA-Z0-9:]+)([0-9ijk])" "subscript autobrackets" riA
-`!p snip.rv = f"{match.group(2)}_{{{match.group(3)}}}" if not match.group(1) else f"{match.group(1)}{match.group(2)}{match.group(3)}"`
+snippet "([ \(\)\$\t]|^|\\dot{)(?<!\_\{|\^\{)(?<!\\label\{)(\\[a-zA-Z0-9:]{2,}[\}]?|(?<!\\)([a-zA-Z:][0-9]?)[\}]?)([0-9ijk])" "subscript autobrackets" riA
+`!p snip.rv = f"{match.group(1)}{match.group(2)}{match.group(4)}" if (match.group(2).startswith('\\') and match.group(2) not in greek_commands) else f"{match.group(1)}{match.group(2)}_{{{match.group(4)}}}"`
 endsnippet
 	
 # auto snippets
@@ -213,8 +226,8 @@ snippet to "\to" wA
 endsnippet
 
 context "math()"
-snippet partial "partial" wA
-\partial
+snippet "(?<!\\)partial" "partial" rA
+`!p snip.rv = '\\'+ match.group(0)`
 endsnippet
 
 context "math()"
@@ -243,7 +256,16 @@ snippet "(?<!\\)nu" "nu" rA
 endsnippet
 
 context "math()"
+snippet "(?<!\\)mu" "mu" rA
+`!p snip.rv = '\\'+ match.group(0)`
+endsnippet
+ 
+context "math()"
 snippet "(?<!\\)ell" "ell" rA
 `!p snip.rv = '\\'+ match.group(0)`
 endsnippet
 
+context "math()"
+snippet set "set (\{ \})" A
+\{ $1, ..., $2\}
+endsnippet

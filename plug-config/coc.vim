@@ -54,7 +54,7 @@ endfunction
 " let g:coc_snippet_next = '<tab>'
 
 " " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-leader> coc#refresh()
  
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.

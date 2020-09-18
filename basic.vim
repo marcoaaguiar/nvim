@@ -24,6 +24,7 @@ let fancy_symbols_enabled = 1
 set scrolloff=4
 filetype plugin on 
 
+let g:python3_host_prog='/usr/bin/python3.7'
 " highlight yanked text
 augroup highlight_yank
     autocmd!

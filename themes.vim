@@ -1,7 +1,8 @@
 " apply gruvbox
 " colorscheme gruvbox
+set t_Co =256
 set background=dark
-" let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_italic=1
 
 " nord theme

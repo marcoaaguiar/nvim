@@ -40,6 +40,9 @@ inoremap hh <Esc>
 " Fold on shift-tab
 nnoremap <s-tab> za
 
+vnoremap < <gv
+vnoremap > >gv
+
 " Show highlight group for word under cursor
 " nmap <C-S-T> :call <SID>SynStack()<CR>
 " function! <SID>SynStack()

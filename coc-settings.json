@@ -15,7 +15,7 @@
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
-    "--load-plugins=pylint_django",
+    //    "--load-plugins=pylint_django",
     "--disable=C0116"
   ]
   //"snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
