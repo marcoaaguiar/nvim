@@ -16,6 +16,7 @@ source ~/.config/nvim/plug-config/vimtex.vim
 source ~/.config/nvim/plug-config/tex-conceal.vim
 source ~/.config/nvim/plug-config/ultisnips.vim
 source ~/.config/nvim/plug-config/goyo.vim
+source ~/.config/nvim/plug-config/vim-cycle.vim
 source ~/.config/nvim/colemak.vim
 source ~/.config/nvim/term.vim
 source ~/.config/nvim/shortcuts.vim

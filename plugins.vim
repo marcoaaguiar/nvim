@@ -87,6 +87,8 @@ Plug 'junegunn/goyo.vim'
 
 " " Clever f
 " Plug 'rhysd/clever-f.vim'
+" Use CTRL XA to swap things eg: false -> true
+Plug 'bootleq/vim-cycle'
 call plug#end()
 
 
