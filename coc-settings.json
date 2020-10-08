@@ -1,23 +1,25 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "markdown",
-    "javascript",
-    "typscript",
-    "graphql",
-    "html",
-    "yaml",
-    "json",
-    "python"
-  ],
-  "markdownlint.config": { "line_length": false },
-  "python.jediEnabled": false,
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": [
-    //    "--load-plugins=pylint_django",
-    "--disable=C0116"
-  ]
-  //"snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
-  //"snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "markdown",
+        "javascript",
+        "typscript",
+        "graphql",
+        "html",
+        "yaml",
+        "json",
+        "python"
+    ],
+    "markdownlint.config": {
+        "line_length": false
+    },
+    "python.jediEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        //    "--load-plugins=pylint_django",
+        "--disable=C0116,C0115,C0114"
+    ]
+    //"snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
+    //"snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
 }
