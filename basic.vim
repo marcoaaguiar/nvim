@@ -28,7 +28,7 @@ let g:python3_host_prog='/usr/bin/python3'
 " highlight yanked text
 augroup highlight_yank
     autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)
+    au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
 augroup END
 
 " Relative line number (auto hybrid)

@@ -3,6 +3,7 @@ source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/themes.vim
 " " source ~/.config/nvim/init.vim.bkup
 source ~/.config/nvim/plug-config/coc.vim
+source ~/.config/nvim/plug-config/gutentags.vim
 " source ~/.config/nvim/plug-config/nerdtree.vim
 source ~/.config/nvim/plug-config/chadtree.vim
 source ~/.config/nvim/plug-config/nerdcommenter.vim
@@ -17,6 +18,12 @@ source ~/.config/nvim/plug-config/tex-conceal.vim
 source ~/.config/nvim/plug-config/ultisnips.vim
 source ~/.config/nvim/plug-config/goyo.vim
 source ~/.config/nvim/plug-config/vim-cycle.vim
+source ~/.config/nvim/plug-config/treesitter.vim
+source ~/.config/nvim/plug-config/vim-repeat.vim
+source ~/.config/nvim/plug-config/vim-wiki.vim
 source ~/.config/nvim/colemak.vim
 source ~/.config/nvim/term.vim
 source ~/.config/nvim/shortcuts.vim
+
+" colorscheme nord
+colorscheme gruvbox

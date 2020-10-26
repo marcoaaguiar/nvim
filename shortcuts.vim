@@ -2,6 +2,9 @@
 nnoremap <leader>vr :source $MYVIMRC<CR>
 nnoremap <leader>vs :source %<CR>
 nnoremap <leader>vc :e $MYVIMRC<CR>
+if exists(":ConfFiles")
+    nnoremap <leader>vf :ConfFiles<CR>
+endif
 
 " Mapping for buffer movement
 nmap <leader>i :bn<cr>
@@ -35,7 +38,7 @@ nnoremap <C-Left> <C-W><C-H>
 nnoremap <S-A-o> O <Esc>
 nnoremap <A-o> o <Esc>
 " exit insert with 
-inoremap hh <Esc>
+" inoremap hh <Esc>
 
 " Fold on shift-tab
 nnoremap <s-tab> za

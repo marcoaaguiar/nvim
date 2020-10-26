@@ -12,5 +12,3 @@ endif
 autocmd FileType json syntax match Comment +\/\/.\+$+
   
 
-colorscheme nord
-" colorscheme gruvbox

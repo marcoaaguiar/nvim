@@ -38,7 +38,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 
 " " Guttentag
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 " " Python autoimport
 Plug 'mgedmin/python-imports.vim'
@@ -87,8 +87,19 @@ Plug 'junegunn/goyo.vim'
 
 " " Clever f
 " Plug 'rhysd/clever-f.vim'
+
 " Use CTRL XA to swap things eg: false -> true
 Plug 'bootleq/vim-cycle'
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter'
+
+" Vim Repeat
+" Plug 'tpope/vim-repeat'
+Plug 'backdround/vim-repeat'
+
+" Vimwiki
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 

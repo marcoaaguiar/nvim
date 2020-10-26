@@ -1,7 +1,18 @@
 " Fzf ----------------------------
+"
+command! -bang -nargs=? -complete=dir 
+            \ Files call fzf#run(fzf#wrap({'source': "fdfind --type f $( test -f .fzfignore && cat .fzfignore | sed -e 's@^@-E @' -e '$a -I' )"}))
+
+command! -bang -nargs=? -complete=dir 
+            \ FilesAll call fzf#run(fzf#wrap({'source': "fdfind --hidden --no-ignore"}))
+
+command! -bang -nargs=? -complete=dir 
+            \ ConfFiles call fzf#run(fzf#wrap({'source': 'fdfind . --type f --full-path '.stdpath('config') }))
 
 " file finder mapping
 nmap ,e :Files<CR>
+" All files (hidden and ignored included) finder mapping
+nmap ,E :FilesAll<CR>
 " tags (symbols) in current file finder mapping
 nmap ,g :BTag<CR>
 " the same, but with the word under the cursor pre filled

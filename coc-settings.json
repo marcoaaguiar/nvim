@@ -8,6 +8,7 @@
         "html",
         "yaml",
         "json",
+        "rust",
         "python"
     ],
     "markdownlint.config": {
@@ -15,11 +16,30 @@
     },
     "python.jediEnabled": false,
     "python.linting.enabled": true,
+    "python.formatting.provider": "black",
     "python.linting.pylintEnabled": true,
     "python.linting.pylintArgs": [
         //    "--load-plugins=pylint_django",
         "--disable=C0116,C0115,C0114"
-    ]
-    //"snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
-    //"snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
+    ],
+    "languageserver": {
+        "sourcery": {
+            "command": "/home/marco/.config/nvim/sourcery/sourcery",
+            "args": [
+                "lsp"
+            ],
+            "filetypes": [
+                "python"
+            ],
+            "initializationOptions": {
+                "token": "user_1G8t_16_ggV2C0DM4MS_vxw552V_X4hlRDJ79V_QLJw8QsATcWoTGxx4BRU",
+                "extension_version": "sourcery-ai/sourcery 0.8.0",
+                "editor_version": "0.5.0"
+            },
+            "settings": {
+                "metrics.enabled": true
+            },
+            "trace.server": "verbose"
+        }
+    }
 }
