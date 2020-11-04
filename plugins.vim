@@ -37,6 +37,9 @@ Plug 'tpope/vim-surround'
 " " Git integration
 Plug 'tpope/vim-fugitive'
 
+" " Git change marks
+Plug 'mhinz/vim-signify'
+
 " " Guttentag
 Plug 'ludovicchabant/vim-gutentags'
 
@@ -61,12 +64,6 @@ Plug 'troydm/zoomwintab.vim'
 " " Vimspector
 Plug 'puremourning/vimspector'
 
-" " Git change marks
-if has('nvim') || has('patch-8.0.902')
-  Plug 'mhinz/vim-signify'
-else
-  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-endif
 
 " " Latex
 Plug 'lervag/vimtex'
@@ -100,6 +97,11 @@ Plug 'backdround/vim-repeat'
 
 " Vimwiki
 Plug 'vimwiki/vimwiki'
+
+" barbar
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/barbar.nvim'
+
 call plug#end()
 
 

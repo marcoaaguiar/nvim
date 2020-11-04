@@ -1,4 +1,4 @@
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 if fancy_symbols_enabled
     let g:webdevicons_enable = 1

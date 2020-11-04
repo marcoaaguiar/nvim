@@ -17,6 +17,8 @@ set incsearch
 set autoread
 set nostartofline
 
+set mouse=a
+
 set encoding=utf-8
 let using_neovim = has('nvim')
 let using_vim = !using_neovim
@@ -56,3 +58,7 @@ endif
 
 " Multi-mode mappings (Normal, Visual, Operating-pending modes).
 noremap Y y$
+
+" Remove weird behaviour when typing :
+autocmd FileType python setlocal indentkeys-=<:>
+autocmd FileType python setlocal indentkeys-=:

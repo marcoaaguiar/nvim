@@ -12,9 +12,10 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 
 if has('win32')
-    nmap <C-/> <Plug>NERDCommenterToggle
+    nmap <C-/> <Plug>NERDCommenterToggle<CR>
     vmap <C-/> <Plug>NERDCommenterToggle
 else
-    nmap <C-_> <Plug>NERDCommenterToggle
+    nmap <C-_> <Plug>NERDCommenterToggle<CR>
     vmap <C-_> <Plug>NERDCommenterToggle
 endif
+
