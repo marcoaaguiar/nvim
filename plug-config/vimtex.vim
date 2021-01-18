@@ -1,8 +1,8 @@
 let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
+" let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 let g:vimtex_compiler_method='latexmk'
-let g:vimtex_latexmk_options = '-pdf -verbose -file-line-error -synctex=1'
+" let g:vimtex_latexmk_options = '-pdf -verbose -file-line-error -synctex=1'
 let g:vimtex_compiler_latexmk = {
             \ 'backend' : 'nvim',
             \ 'background' : 1,
@@ -19,7 +19,8 @@ let g:vimtex_compiler_latexmk = {
             \ ],
             \}
 
-nnoremap <leader>lf :w <CR> \| :!latexindent -w -s % <CR> \| :e <CR> \| :echo "Document Formated!" <CR>
+nnoremap <leader>lf :w <CR> \| :!latexindent -w -s --yaml='defaultIndent:"    ",removeTrailingWhitespace:1' % <CR> \| :e <CR> \| :echo "Document Formated!" <CR>
+
 " nnoremap <leader>lf :%!latexindent <CR>
 augroup tex_settings
     autocmd!
@@ -27,9 +28,9 @@ augroup tex_settings
     autocmd BufEnter *.tex :set scrolloff=10
 
     autocmd FileType tex echo "Tex file"
-    " $chang in $
-    autocmd FileType tex xmap <buffer> i$ <plug>(vimtex-i$)
-    autocmd FileType tex omap <buffer> i$ <plug>(vimtex-i$)
+    " change in $
+    autocmd FileType tex xmap <buffer> u$ <plug>(vimtex-i$)
+    autocmd FileType tex omap <buffer> u$ <plug>(vimtex-i$)
      
     " change in env
     autocmd FileType tex xmap <buffer> ue <plug>(vimtex-ie)

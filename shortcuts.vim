@@ -1,6 +1,9 @@
 " VIM Meta
+command! -range=% Exec call execute(getline(<line1>, <line2>), '')
+
 nnoremap <leader>vr :source $MYVIMRC<CR>
-nnoremap <leader>vs :source %<CR>
+nnoremap <leader>vs :Exec<CR>
+vnoremap <leader>vs :Exec<CR>
 nnoremap <leader>vc :e $MYVIMRC<CR>
 if exists(":ConfFiles")
     nnoremap <leader>vf :ConfFiles<CR>
@@ -43,15 +46,30 @@ nnoremap <A-o> o <Esc>
 " Fold on shift-tab
 nnoremap <s-tab> za
 
+" keep selection after changing indentation
 vnoremap < <gv
 vnoremap > >gv
 
+" change with register 0
+vnoremap <A-c> c<c-r>0
+
+nnoremap <silent> <C-N> :join!<CR>
+vnoremap <silent> <C-N> :join!<CR>
+
+" shortcuts for []
+nnoremap <silent> dar da[
+nnoremap <silent> yar ya[
+nnoremap <silent> car ca[
+nnoremap <silent> dur di[
+nnoremap <silent> yur yi[
+nnoremap <silent> cur ci[
+
 " Show highlight group for word under cursor
 " nmap <C-S-T> :call <SID>SynStack()<CR>
-" function! <SID>SynStack()
-"   if !exists("*synstack")
-"       return
-"         endif
-"           echo map(synstack(line('.'), col('.')), 'synIDattr(v:val,
-"           "name")')
-"           endfunc
+
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc

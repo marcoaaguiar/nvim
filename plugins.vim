@@ -12,6 +12,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " " Gruvbox theme
 Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
+Plug 'romgrk/doom-one.vim'
 
 " " Airline
 Plug 'vim-airline/vim-airline'
@@ -90,6 +91,8 @@ Plug 'bootleq/vim-cycle'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'p00f/nvim-ts-rainbow'
+Plug 'romgrk/nvim-treesitter-context'
 
 " Vim Repeat
 " Plug 'tpope/vim-repeat'
@@ -101,6 +104,17 @@ Plug 'vimwiki/vimwiki'
 " barbar
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
+
+" Rainbow bracket
+" Plug 'luochen1990/rainbow'
+
+" Plug 'gianarb/coc-grammarly', {'do': 'yarn install --frozen-lockfile'}
+
+" run code in line
+" Plug 'metakirby5/codi.vim'
+
+" Project/session management
+Plug 'mhinz/vim-startify' ", {'branch': 'center'}
 
 call plug#end()
 

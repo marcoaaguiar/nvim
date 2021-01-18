@@ -1,23 +1,25 @@
 " Basic settings
-syntax on
-set noerrorbells
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set nu
-set nowrap
-set ignorecase
-set smartcase
+syntax on " Activate syntax highlighting
+set noerrorbells " don't use system bell for errors (backspacing an empty line)
+set tabstop=4 " Change default tab
+set softtabstop=4 " Change default tab
+set shiftwidth=4 " Change default tab
+set expandtab " Uses spaces instead of tabs
+set nu " Display line numbers
+set nowrap " Don't wrap lines that are longer than the window/buffer
+set ignorecase " Ignore case when searching 
+set smartcase " Ignore case when searching unless it has an Upper Case
 set noswapfile
 set nobackup
-set undodir=~/.config/nvim/.undodir
-set undofile
-set incsearch
+set undodir=~/.config/nvim/.undodir " folder do save the undo commands
+set undofile " save undos in a undofile (persist undo between sessions)
+set incsearch " search while typing (don't wait for enter to start to search)
 set autoread
 set nostartofline
 
-set mouse=a
+set mouse=a " Use mouse in all modes (visual, normal, insert, ...)
+
+set mmp=5000
 
 set encoding=utf-8
 let using_neovim = has('nvim')
@@ -34,26 +36,27 @@ augroup highlight_yank
 augroup END
 
 " Relative line number (auto hybrid)
-:set number relativenumber
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
-set splitbelow
-set splitright
+set splitbelow " create new splits bellow the current buffer
+set splitright " create new splits to the right of the current buffer
 
 " Auto reload modified files
 autocmd BufEnter,FocusGained * checktime
 
 " Folding
 if has('folding')
-  if has('windows')
-    let &fillchars='vert: '           " less cluttered vertical window separators
-  endif
-  set foldmethod=indent               " not as cool as syntax, but faster
-  set foldlevelstart=99               " start unfolded
+    if has('windows')
+        let &fillchars='vert: '           " less cluttered vertical window separators
+    endif
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+    set foldlevelstart=99               " start unfolded
 endif
 
 " Multi-mode mappings (Normal, Visual, Operating-pending modes).

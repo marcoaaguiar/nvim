@@ -1,5 +1,8 @@
 " Fzf ----------------------------
-"
+let g:fzf_history_dir= stdpath('data').'/fzf/history'
+
+
+
 command! -bang -nargs=? -complete=dir 
             \ Files call fzf#run(fzf#wrap({'source': "fdfind --type f $( test -f .fzfignore && cat .fzfignore | sed -e 's@^@-E @' -e '$a -I' )"}))
 
@@ -26,7 +29,7 @@ nmap ,f :BLines<CR>
 " the same, but with the word under the cursor pre filled
 nmap ,wf :execute ":BLines " . expand('<cword>')<CR>
 " general code finder in all files mapping
-nmap ,F :Lines<CR>
+nmap ,F :Rg<CR>
 " the same, but with the word under the cursor pre filled
 nmap ,wF :execute ":Lines " . expand('<cword>')<CR>
 " commands finder mapping
@@ -35,6 +38,8 @@ nmap ,c :Commands<CR>
 " open buffers
 nmap ,b :Buffers<CR>
 
+" open buffers
+nmap ,s :Snippets<CR>
 
 set ttimeout
 set ttimeoutlen=0

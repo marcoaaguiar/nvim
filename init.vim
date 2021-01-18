@@ -23,9 +23,17 @@ source ~/.config/nvim/plug-config/treesitter.vim
 source ~/.config/nvim/plug-config/vim-repeat.vim
 source ~/.config/nvim/plug-config/vim-wiki.vim
 source ~/.config/nvim/plug-config/barbar.vim
+source ~/.config/nvim/plug-config/rainbow.vim
+" source ~/.config/nvim/plug-config/codi.vim
+source ~/.config/nvim/plug-config/startify.vim
 source ~/.config/nvim/colemak.vim
 source ~/.config/nvim/term.vim
 source ~/.config/nvim/shortcuts.vim
 
+source ~/.config/nvim/run.vim
+
 " colorscheme nord
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme doom-one
+
+" set runtimepath^=/home/marco/repos/coc-grammarly

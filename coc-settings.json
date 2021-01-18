@@ -14,7 +14,6 @@
     "markdownlint.config": {
         "line_length": false
     },
-    "python.jediEnabled": false,
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
     "python.linting.pylintEnabled": true,
@@ -40,6 +39,20 @@
                 "metrics.enabled": true
             },
             "trace.server": "verbose"
+        },
+        "grammarly": {
+            "module": "/home/marco/.config/nvim/node_modules/unofficial-grammarly-language-server/bin/server.js",
+            "args": [],
+            "filetypes": [
+                // "markdown",
+                // "tex",
+                // "vimwiki"
+            ],
+            "trace.server": "verbose",
+            "rootPatterns": [],
+            "execArgv": [],
+            "initializationOptions": {},
+            "settings": {}
         }
-    }
+    },
 }
