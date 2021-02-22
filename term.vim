@@ -8,6 +8,7 @@ if has('nvim')
         endif
         :tnoremap <buffer> <C-w> <C-\><C-n><C-w>
         :tnoremap <buffer> <Esc><Esc> <C-\><C-n>
+        :nnoremap <buffer> <C-c> Aarsta
     endfun
     autocmd TermEnter * call CreateTermMappings()
 endif 

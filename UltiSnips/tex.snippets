@@ -58,7 +58,7 @@ $${1:${VISUAL}}$
 endsnippet
 
 
-snippet "(?:(?<=\s)|^)ref" "ref" rA
+snippet "(?:(?<=\s)|^)ref" "ref" r
 \ref{$1}
 endsnippet
 
@@ -113,12 +113,17 @@ endsnippet
 
 context "math()"
 snippet sr "squared" iA
-^{2}
+^2
+endsnippet
+
+context "math()"
+snippet sk "^k" iA
+^k
 endsnippet
 
 context "math()"
 snippet tr "transpose" iA
-^{T}
+^T
 endsnippet
 
 context "math()"
@@ -157,6 +162,11 @@ post_jump "make_jumper(snip)"
 snippet rn "\mathbb{R}^{N_?}" iA
 `!p jump_after_one_character(snip)
 `\mathbb{R}^{N_${1:}}
+endsnippet
+
+context "math()"
+snippet mbr "\mathbb{R}" iA
+\mathbb{R}
 endsnippet
 
 context "math()"

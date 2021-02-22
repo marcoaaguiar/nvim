@@ -1,5 +1,6 @@
 " Basic settings
 syntax on " Activate syntax highlighting
+set hidden
 set noerrorbells " don't use system bell for errors (backspacing an empty line)
 set tabstop=4 " Change default tab
 set softtabstop=4 " Change default tab
@@ -49,15 +50,13 @@ set splitright " create new splits to the right of the current buffer
 " Auto reload modified files
 autocmd BufEnter,FocusGained * checktime
 
+" less cluttered vertical window separators
+let &fillchars='vert: '           
+
 " Folding
-if has('folding')
-    if has('windows')
-        let &fillchars='vert: '           " less cluttered vertical window separators
-    endif
-    set foldmethod=expr
-    set foldexpr=nvim_treesitter#foldexpr()
-    set foldlevelstart=99               " start unfolded
-endif
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevelstart=99               " start unfolded
 
 " Multi-mode mappings (Normal, Visual, Operating-pending modes).
 noremap Y y$

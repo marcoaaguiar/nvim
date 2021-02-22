@@ -73,3 +73,14 @@ function! <SID>SynStack()
     endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+vnoremap * "9y/\V<C-r>9<CR>
+
+" Shift+<- or -> select word
+nnoremap <silent> H vb
+nnoremap <silent> I ve
+vnoremap <silent> H b
+vnoremap <silent> I e
+
+" sudo save protected files
+" command -bang w!! normal w !sudo tee > /dev/null %

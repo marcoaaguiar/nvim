@@ -7,7 +7,8 @@ endif
 Plug 'ryanoasis/vim-devicons'
 
 " " Stable version of coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " " Gruvbox theme
 Plug 'morhetz/gruvbox'
@@ -20,8 +21,8 @@ Plug 'vim-airline/vim-airline-themes'
 
 " " Better file browser
 " Plug 'scrooloose/nerdtree'
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
- 
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+
 " " Code and files fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -45,7 +46,7 @@ Plug 'mhinz/vim-signify'
 Plug 'ludovicchabant/vim-gutentags'
 
 " " Python autoimport
-Plug 'mgedmin/python-imports.vim'
+" Plug 'mgedmin/python-imports.vim'
 
 " " Comment out lines
 Plug 'preservim/nerdcommenter'
@@ -57,13 +58,13 @@ Plug 'preservim/nerdcommenter'
 Plug 'majutsushi/tagbar'
 
 " " Zoom in window
-Plug 'troydm/zoomwintab.vim'
+" Plug 'troydm/zoomwintab.vim'
 
 " " Show ident lines
 " " Plug 'Yggdroot/indentLine'
 
 " " Vimspector
-Plug 'puremourning/vimspector'
+" Plug 'puremourning/vimspector'
 
 
 " " Latex
@@ -87,7 +88,7 @@ Plug 'junegunn/goyo.vim'
 " Plug 'rhysd/clever-f.vim'
 
 " Use CTRL XA to swap things eg: false -> true
-Plug 'bootleq/vim-cycle'
+" Plug 'bootleq/vim-cycle'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -116,6 +117,8 @@ Plug 'romgrk/barbar.nvim'
 " Project/session management
 Plug 'mhinz/vim-startify' ", {'branch': 'center'}
 
+" GraphViz
+" Plug 'liuchengxu/graphviz.vim'
 call plug#end()
 
 

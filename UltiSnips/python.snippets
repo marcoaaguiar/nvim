@@ -75,28 +75,28 @@ def ${1:function}(${2:arg1}):
     ${5:${VISUAL:pass}}
 endsnippet
 
-# context "px.snippets.make_context(snip)"
-# post_jump "clean_first_placeholder(snip)"
-# snippet class "class with docstrings" b
-# class ${1:MyClass}(${2}):
-#     def __init__(self$3):`!p
-# snip.rv = ""
-# snip >> 2
-# args = get_args(t[3])
-# write_init_body(args, t[2], snip)
-# `
-#         $0
-# endsnippet
+context "px.snippets.make_context(snip)"
+post_jump "clean_first_placeholder(snip)"
+snippet class "class with docstrings" b
+class ${1:MyClass}(${2}):
+	def __init__(self$3):`!p
+snip.rv = ""
+snip >> 2
+args = get_args(t[3])
+write_init_body(args, t[2], snip)
+`
+		$0
+endsnippet
 
-# snippet defi
-#     def __init__(self, ${1:args}):`!p
-# snip.rv = ""
-# snip >> 2
-# args = get_args(t[1])
-# write_init_body(args, '', snip)
-# `
-#         $0
-# endsnippet
+snippet defi
+	def __init__(self, ${1:args}):`!p
+snip.rv = ""
+snip >> 2
+args = get_args(t[1])
+write_init_body(args, '', snip)
+`
+		$0
+endsnippet
 
 snippet san "None attribute"
 self.$1 = None
