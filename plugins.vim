@@ -143,6 +143,7 @@ Plug 'nacro90/numb.nvim'
 " " Show ident lines
 " Plug 'Yggdroot/indentLine'
 " Plug 'lukas-reineke/indent-blankline.nvim'
+Plug "marcoaaguiar/run.nvim"
 call plug#end()
 
 
