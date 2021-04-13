@@ -89,15 +89,34 @@ write_init_body(args, t[2], snip)
 endsnippet
 
 snippet defi
-	def __init__(self, ${1:args}):`!p
+def __init__(self, ${1:args}):`!p
 snip.rv = ""
-snip >> 2
+snip >> 1
 args = get_args(t[1])
 write_init_body(args, '', snip)
-`
-		$0
+snip+=""`$0
 endsnippet
 
 snippet san "None attribute"
 self.$1 = None
+endsnippet
+
+snippet sui "super"
+super().__init__(*args, **kwargs)
+endsnippet
+
+snippet = "x=x"
+$1=$1$0
+endsnippet
+
+
+
+snippet p "print('')"
+print("$1")$0
+endsnippet
+
+snippet property "@property"
+@property
+def $1(self) -> $2:
+	return self._$1
 endsnippet

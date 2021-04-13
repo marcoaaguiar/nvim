@@ -11,7 +11,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " " Gruvbox theme
-Plug 'morhetz/gruvbox'
+Plug 'rktjmp/lush.nvim'
+" Plug 'npxbr/gruvbox.nvim'
+" Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 Plug 'romgrk/doom-one.vim'
 
@@ -60,8 +63,6 @@ Plug 'majutsushi/tagbar'
 " " Zoom in window
 " Plug 'troydm/zoomwintab.vim'
 
-" " Show ident lines
-" " Plug 'Yggdroot/indentLine'
 
 " " Vimspector
 " Plug 'puremourning/vimspector'
@@ -91,7 +92,7 @@ Plug 'junegunn/goyo.vim'
 " Plug 'bootleq/vim-cycle'
 
 " Treesitter
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " Plug 'p00f/nvim-ts-rainbow'
 Plug 'romgrk/nvim-treesitter-context'
 
@@ -119,6 +120,29 @@ Plug 'mhinz/vim-startify' ", {'branch': 'center'}
 
 " GraphViz
 " Plug 'liuchengxu/graphviz.vim'
+
+" Case insensitive substitution, smart auto typo fix, snake case <-> camel case
+Plug 'tpope/vim-abolish'
+
+" Fade inactive buffer
+Plug 'TaDaa/vimade'
+
+"
+Plug '~/repos/run.nvim'
+Plug 'rafcamlet/coc-nvim-lua'
+
+" Debugger
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'mfussenegger/nvim-dap-python'
+
+Plug 'terryma/vim-multiple-cursors'
+
+" Peek line while you jump to line (:23)
+Plug 'nacro90/numb.nvim'
+
+" " Show ident lines
+" Plug 'Yggdroot/indentLine'
+" Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
 
 

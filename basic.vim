@@ -17,6 +17,9 @@ set undofile " save undos in a undofile (persist undo between sessions)
 set incsearch " search while typing (don't wait for enter to start to search)
 set autoread
 set nostartofline
+set winblend=10 " pseudo transparency for floating windows
+set fileformat=unix
+set fileformats=unix,dos
 
 set mouse=a " Use mouse in all modes (visual, normal, insert, ...)
 
@@ -29,7 +32,7 @@ let fancy_symbols_enabled = 1
 set scrolloff=4
 filetype plugin on 
 
-let g:python3_host_prog='/usr/bin/python3'
+let g:python3_host_prog='/home/marco/.pyenv/shims/python3'
 " highlight yanked text
 augroup highlight_yank
     autocmd!
@@ -40,8 +43,8 @@ augroup END
 set number relativenumber
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  autocmd BufEnter,FocusGained,InsertLeave * if &number | set relativenumber | endif
+  autocmd BufLeave,FocusLost,InsertEnter   * if &number | set norelativenumber | endif
 augroup END
 
 set splitbelow " create new splits bellow the current buffer
@@ -61,6 +64,9 @@ set foldlevelstart=99               " start unfolded
 " Multi-mode mappings (Normal, Visual, Operating-pending modes).
 noremap Y y$
 
+" Remove Ex mode
+nnoremap Q <Nop>
+
 " Remove weird behaviour when typing :
-autocmd FileType python setlocal indentkeys-=<:>
-autocmd FileType python setlocal indentkeys-=:
+set indentkeys-=<:>
+set indentkeys-=:

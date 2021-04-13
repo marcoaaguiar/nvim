@@ -19,12 +19,11 @@
   "python.formatting.provider": "black",
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
-    //    "--load-plugins=pylint_django",
     "--disable=C0116,C0115,C0114"
   ],
   "languageserver": {
     "sourcery": {
-      "command": "/home/marco/.config/nvim/sourcery/sourcery",
+      "command": "/home/marco/.local/bin/sourcery",
       "args": [
         "lsp"
       ],
@@ -37,7 +36,8 @@
         "editor_version": "0.5.0"
       },
       "settings": {
-        "metrics.enabled": true
+        "metrics.enabled": true,
+        "simplify-len-comparison": false
       },
       "trace.server": "verbose"
     },
@@ -56,4 +56,7 @@
       "settings": {}
     }
   },
+  "grammarly.domain": "academic",
+  "grammarly.audience": "knowledgeable",
+  "grammarly.dialect": "american"
 }

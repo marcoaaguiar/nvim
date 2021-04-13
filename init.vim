@@ -30,11 +30,17 @@ if !debug
     source ~/.config/nvim/plug-config/rainbow.vim
     " source ~/.config/nvim/plug-config/codi.vim
     source ~/.config/nvim/plug-config/startify.vim
+    source ~/.config/nvim/plug-config/vimade.vim
+    source ~/.config/nvim/plug-config/surround.vim
+    source ~/.config/nvim/plug-config/numb.nvim.vim
+    " source ~/.config/nvim/plug-config/dap.vim
     source ~/.config/nvim/colemak.vim
     source ~/.config/nvim/term.vim
     source ~/.config/nvim/shortcuts.vim
+    source ~/.config/nvim/run.nvim.vim
     source ~/.config/nvim/run.vim
     source ~/.config/nvim/setup.vim
+    source ~/.config/nvim/twitch.vim
 
     " colorscheme nord
     colorscheme gruvbox

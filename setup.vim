@@ -3,6 +3,7 @@ function! SetupFn() abort
     if !empty(expand(glob(filename)))
         let config = json_decode(join(readfile(filename)))
     else
+        call mkdir(".vim/","p")
         let config = {}
     endif
     let config['python.pythonPath'] = substitute(system("poetry env info --path") . '/bin/python', '\n', '', '')

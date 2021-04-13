@@ -1,1 +1,1 @@
-let g:gutentags_cache_dir = stdpath("config") + "/tags/"
+let g:gutentags_cache_dir = stdpath("config") . "/tags/"

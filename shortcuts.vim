@@ -38,8 +38,8 @@ nnoremap <C-Right> <C-W><C-L>
 nnoremap <C-Left> <C-W><C-H>
 
 " Create new line above and below
-nnoremap <S-A-o> O <Esc>
-nnoremap <A-o> o <Esc>
+nnoremap <S-A-o> O<Esc>
+nnoremap <A-o> o<Esc>
 " exit insert with 
 " inoremap hh <Esc>
 
@@ -56,16 +56,9 @@ vnoremap <A-c> c<c-r>0
 nnoremap <silent> <C-N> :join!<CR>
 vnoremap <silent> <C-N> :join!<CR>
 
-" shortcuts for []
-nnoremap <silent> dar da[
-nnoremap <silent> yar ya[
-nnoremap <silent> car ca[
-nnoremap <silent> dur di[
-nnoremap <silent> yur yi[
-nnoremap <silent> cur ci[
 
 " Show highlight group for word under cursor
-" nmap <C-S-T> :call <SID>SynStack()<CR>
+nmap <C-A-T> :call <SID>SynStack()<CR>
 
 function! <SID>SynStack()
     if !exists("*synstack")
@@ -81,6 +74,16 @@ nnoremap <silent> H vb
 nnoremap <silent> I ve
 vnoremap <silent> H b
 vnoremap <silent> I e
+
+" Move visual block
+vnoremap <c-down> :m '>+1<CR>gv=gv
+vnoremap <c-up> :m '<-2<CR>gv=gv
+
+" yank to clipboard
+nnoremap <c-y> "*y
+ 
+" nmap <c-down> <Plug>(SmoothieDownwards) 
+" nmap <c-up> <Plug>(SmoothieUpwards)
 
 " sudo save protected files
 " command -bang w!! normal w !sudo tee > /dev/null %
