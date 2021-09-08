@@ -81,7 +81,8 @@ vnoremap <c-up> :m '<-2<CR>gv=gv
 
 " yank to clipboard
 nnoremap <c-y> "*y
- 
+vnoremap <c-s-c> "*y
+
 " nmap <c-down> <Plug>(SmoothieDownwards) 
 " nmap <c-up> <Plug>(SmoothieUpwards)
 

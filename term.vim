@@ -14,6 +14,8 @@ if has('nvim')
         tnoremap <C-Right> <C-\><C-n><C-W><C-L>
         tnoremap <C-Left> <C-\><C-n><C-W><C-H>
 
+        setlocal nonumber norelativenumber
+        " set signcolumn=false
     endfun
     autocmd TermEnter * call CreateTermMappings()
 endif 

@@ -11,11 +11,8 @@ let g:NERDDefaultAlign = 'left'
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 
-if has('win32')
-    nmap <C-/> <Plug>NERDCommenterToggle<CR>
-    vmap <C-/> <Plug>NERDCommenterToggle
-else
-    nmap <C-_> <Plug>NERDCommenterToggle<CR>
-    vmap <C-_> <Plug>NERDCommenterToggle
-endif
+nmap <C-/> <Plug>NERDCommenterToggle<CR>
+vmap <C-/> <Plug>NERDCommenterToggle
+nmap <C-_> <Plug>NERDCommenterToggle<CR>
+vmap <C-_> <Plug>NERDCommenterToggle
 

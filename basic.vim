@@ -20,6 +20,7 @@ set nostartofline
 set winblend=10 " pseudo transparency for floating windows
 set fileformat=unix
 set fileformats=unix,dos
+set nocp
 
 set mouse=a " Use mouse in all modes (visual, normal, insert, ...)
 
@@ -32,7 +33,11 @@ let fancy_symbols_enabled = 1
 set scrolloff=4
 filetype plugin on 
 
-let g:python3_host_prog='/home/marco/.pyenv/shims/python3'
+" GUI
+set guifont=CaskaydiaCove\ NF:h14
+highlight link NormalFloat CursorColumn
+
+let g:python3_host_prog='~/.config/nvim/.venv/bin/python3'
 " highlight yanked text
 augroup highlight_yank
     autocmd!
@@ -70,3 +75,6 @@ nnoremap Q <Nop>
 " Remove weird behaviour when typing :
 set indentkeys-=<:>
 set indentkeys-=:
+
+" make hyphenized words to be considered a single word
+set iskeyword+=\-

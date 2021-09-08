@@ -101,7 +101,7 @@ snippet san "None attribute"
 self.$1 = None
 endsnippet
 
-snippet sui "super"
+snippet superinit "super"
 super().__init__(*args, **kwargs)
 endsnippet
 
@@ -109,10 +109,17 @@ snippet = "x=x"
 $1=$1$0
 endsnippet
 
+snippet : "'x':x,"
+"$1":$1,
+endsnippet
+
+snippet Ll "LOGGER = logging.getLogger(__file__)"
+LOGGER = logging.getLogger(__file__)
+endsnippet
 
 
 snippet p "print('')"
-print("$1")$0
+print("${VISUAL:1}")$0
 endsnippet
 
 snippet property "@property"

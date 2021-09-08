@@ -24,6 +24,8 @@ function! MonkeyTerminalOpen()
             call chansend(s:monkey_terminal_job_id, g:monkey_terminal_startup)
         endif
 
+        setlocal nonumber norelativenumber
+        set signcolumn=no
         " The buffer of the terminal won't appear in the list of the buffers
         " when calling :buffers command
         " set nobuflisted
