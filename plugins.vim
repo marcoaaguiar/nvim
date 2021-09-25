@@ -145,7 +145,8 @@ Plug 'tpope/vim-abolish'
 " Plug 'TaDaa/vimade'
 
 "
-Plug '~/repos/run.nvim'
+" Plug '~/repos/run.nvim'
+Plug 'marcoaaguiar/run.nvim'
 Plug 'rafcamlet/coc-nvim-lua'
 
 " Debugger

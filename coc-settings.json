@@ -22,7 +22,7 @@
   "python.sortImports.args": ["--profile", "black"],
   "languageserver": {
     "sourcery": {
-      "command": "/home/marco/.local/bin/sourcery",
+      "command": "/home/marco/.config/nvim/sourcery/sourcery",
       "args": ["lsp"],
       "filetypes": ["python"],
       "initializationOptions": {
