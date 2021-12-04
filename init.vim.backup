@@ -2,7 +2,15 @@ let debug=0
 
 if !debug
     source ~/.config/nvim/basic.vim
+
+
     source ~/.config/nvim/plugins.vim
+
+    lua <<EOF
+    require('plugins')
+ print("Hello user! Welcome to Neovim!")
+EOF
+    
     source ~/.config/nvim/themes.vim
     source ~/.config/nvim/filetypes.vim
     " " source ~/.config/nvim/init.vim.bkup
