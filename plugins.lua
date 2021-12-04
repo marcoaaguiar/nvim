@@ -135,7 +135,7 @@ return require('packer').startup(function(use)
 
     -- " auto complet in command line
     -- " :UpdateRemotePlugins needed
-    use {'gelguy/wilder.nvim',  run = ':UpdateRemotePlugins', event = 'CmdlineEnter'}
+    use {'gelguy/wilder.nvim',  run = ':UpdateRemotePlugins'}
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
