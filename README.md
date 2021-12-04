@@ -28,20 +28,26 @@ sudo make install
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
+## Plugins to consider
+
+- https://github.com/danymat/neogen
+- folke/todo-comments.nvim
+- folke/trouble.nvim
+
 ## In Neovim
 
 1. `:PlugInstall`
 2. `:checkhealth`
-" Quick search mapped to "s"
-Plug 'justinmk/vim-sneak'
+   " Quick search mapped to "s"
+   Plug 'justinmk/vim-sneak'
 
-__Options for file finder:__
+**Options for file finder:**
 
 - fzf
 - CtrlP
 - vim-clap
 
-__Things I'm looking for in a python env "__
+**Things I'm looking for in a python env "**
 
 - Syntax highlinting
 - Auto completetion
