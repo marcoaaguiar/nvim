@@ -26,10 +26,16 @@ return require('packer').startup(function(use)
     }
 
     -- LSP
+    use 'neovim/nvim-lspconfig'
+    use 'williamboman/nvim-lsp-installer'
 
     -- LSP Extras
     use 'kosayoda/nvim-lightbulb' -- TODO: Config
-    -- look at folke/trouble.nvim
+    -- Lua
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+    }
 
 
     -- Better file browser

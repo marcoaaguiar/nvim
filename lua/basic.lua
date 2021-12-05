@@ -22,6 +22,7 @@ set winblend=10 " pseudo transparency for floating windows
 set fileformat=unix
 set fileformats=unix,dos
 set nocp
+set signcolumn=yes
 
 set mouse=a " Use mouse in all modes (visual, normal, insert, ...)
 
