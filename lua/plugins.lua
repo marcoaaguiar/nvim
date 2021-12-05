@@ -30,13 +30,25 @@ return require('packer').startup(function(use)
     use 'williamboman/nvim-lsp-installer'
 
     -- LSP Extras
-    use 'kosayoda/nvim-lightbulb' -- TODO: Config
-    -- Lua
+    use 'kosayoda/nvim-lightbulb'
     use {
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
     }
+    use 'onsails/lspkind-nvim' -- icon on comp
+    use "ray-x/lsp_signature.nvim" -- methdo signature when writing
+    use "weilbith/nvim-code-action-menu"
 
+
+
+    -- Copmletition
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'quangnguyen30192/cmp-nvim-ultisnips'
+
+    use 'hrsh7th/nvim-cmp'
 
     -- Better file browser
     use {
@@ -128,7 +140,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-abolish'
 
     -- Run files
-    use 'marcoaaguiar/run.nvim'
+    -- use 'marcoaaguiar/run.nvim'
 
     -- Peek line while you jump to line (:23)
     use 'nacro90/numb.nvim'

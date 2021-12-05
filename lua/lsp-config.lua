@@ -1,11 +1,7 @@
 local lsp_installer = require("nvim-lsp-installer")
 
-local on_attach = function(client, bufnr)
+local on_attach_keybind = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
     local opts = { noremap=true, silent=true }
@@ -30,13 +26,18 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+local on_attach = function (client, bufnr)
+    on_attach_keybind(client, bufnr)
+    require("lsp_signature").on_attach(client, bufnr);
+end
+
 lsp_installer.on_server_ready(function(server)
     local opts = {
         on_attach = on_attach,
         flags = {
             debounce_text_changes = 150,
-        }
+        },
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
     }
-
     server:setup(opts)
 end)
