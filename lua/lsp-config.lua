@@ -28,7 +28,7 @@ end
 
 local on_attach = function (client, bufnr)
     on_attach_keybind(client, bufnr)
-    require("lsp_signature").on_attach(client, bufnr);
+    require("lsp_signature").on_attach({bind=true, handler_options={border = "rounded"}}, bufnr);
 end
 
 lsp_installer.on_server_ready(function(server)

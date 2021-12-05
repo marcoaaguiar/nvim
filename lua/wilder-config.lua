@@ -8,5 +8,5 @@ vim.cmd[[
     call wilder#set_option('modes', ['/', '?', ':'])
     call wilder#set_option('renderer', wilder#popupmenu_renderer({'highlighter': wilder#basic_highlighter(), 'left': [wilder#popupmenu_devicons()]}))
 
-
-    call wilder#set_option('pipeline', [ wilder#branch( wilder#python_file_finder_pipeline({ 'file_command': {_, arg -> arg == ""? ["fdfind", "-d", "1"]: stridx(arg, '.') != -1 ? ['fdfind', '-tf', '-H'] : ['fdfind', '-tf']}, 'dir_command': ['fdfind', '-td'], }), [ wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({ 'draw': [{_, x -> ' ' . x}], }), ], wilder#cmdline_pipeline(), wilder#search_pipeline(),), ]) ]]
+    " call wilder#set_option('pipeline', [ wilder#branch( wilder#python_file_finder_pipeline({ 'file_command': {_, arg -> arg == ""? ["fdfind", "-d", "1"]: stridx(arg, '.') != -1 ? ['fdfind', '-tf', '-H'] : ['fdfind', '-tf']}, 'dir_command': ['fdfind', '-td'], }), [ wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({ 'draw': [{_, x -> ' ' . x}], }), ], wilder#cmdline_pipeline({'hide_in_substitute': 0}), wilder#search_pipeline(),), ])
+]]
