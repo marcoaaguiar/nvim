@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
     }
     use 'onsails/lspkind-nvim' -- icon on comp
     use "ray-x/lsp_signature.nvim" -- methdo signature when writing
+    use { 'tami5/lspsaga.nvim', branch = 'nvim6.0' } -- for specific version
 
 
 
