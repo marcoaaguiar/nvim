@@ -88,6 +88,9 @@ return require('packer').startup(function(use)
         },
     }
 
+    -- git integration
+    use 'tpope/vim-fugitive'
+
     -- Code commenting
     use 'b3nj5m1n/kommentary'
 

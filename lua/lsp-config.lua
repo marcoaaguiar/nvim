@@ -3,7 +3,7 @@ local lsp_installer = require("nvim-lsp-installer")
 local on_attach_keybind = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
-    -- Mappings.
+    -- lspconfig.
     local opts = { noremap=true, silent=true }
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -31,13 +31,39 @@ local on_attach = function (client, bufnr)
     require("lsp_signature").on_attach({bind=true, handler_options={border = "rounded"}}, bufnr);
 end
 
+local function file_exists(file_name)
+    local f = io.open(file_name, "rb")
+    if f then f:close() end
+    return f ~= nil
+end
+
+local function load_local_config(filename)
+    if not file_exists(filename) then
+        return {}
+    end
+    local file = io.open('.vim/lspconfig.json', "rb") -- r read mode and b binary mode
+
+    local content = file:read "*a" -- *a or *all reads the whole file
+    file:close()
+    return vim.fn['json_decode'](content)
+end
+
+
 lsp_installer.on_server_ready(function(server)
     local opts = {
         on_attach = on_attach,
         flags = {
             debounce_text_changes = 150,
         },
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        settings = {
+            python={formatting={provider="black"}}
+        }
     }
+
+    local config = load_local_config('.vim/lspconfig.json')
+    for k,v in pairs(config) do opts.settings[k] = v end
+    opts.settings = config
+    -- print(vim.inspect(opts.python.pythonPath))
     server:setup(opts)
 end)

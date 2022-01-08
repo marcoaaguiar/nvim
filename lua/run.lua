@@ -1,7 +1,4 @@
 vim.cmd[[
-" With this function you can reuse the same terminal in neovim.
-" You can toggle the terminal and also send a command to the same terminal.
-
 let s:monkey_terminal_window = -1
 let s:monkey_terminal_buffer = -1
 let s:monkey_terminal_job_id = -1

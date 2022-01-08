@@ -68,9 +68,6 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevelstart=99               " start unfolded
 
-" Multi-mode mappings (Normal, Visual, Operating-pending modes).
-noremap Y y$
-
 " Remove Ex mode
 nnoremap Q <Nop>
 
