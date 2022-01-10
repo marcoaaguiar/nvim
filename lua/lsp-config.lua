@@ -1,5 +1,19 @@
 local lsp_installer = require("nvim-lsp-installer")
+local lspconfig = require 'lspconfig'
 
+-- efm lang server
+--[[ lspconfig.efm.setup {
+    init_options = {documentFormatting = true},
+    settings = {
+        rootMarkers = {".git/"},
+        languages = {
+            lua = {
+                {formatCommand = "lua-format -i", formatStdin = true}
+            }
+        }
+    }
+}
+ ]]
 local on_attach_keybind = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -49,6 +63,20 @@ local function load_local_config(filename)
     return vim.fn['json_decode'](content)
 end
 
+local flake8 = {
+    lintCommand = "poetry run flake8 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
+    lintStdin = true,
+    lintIgnoreExitCode = true,
+    lintFormats = { "%f:%l:%c: %t%n%n%n %m" },
+    lintSource = "flake8",
+}
+
+local mypy = {
+    lintCommand = "poetry run mypy --show-column-numbers --ignore-missing-imports --show-error-codes",
+    lintFormats = {"%f=%l:%c: %trror: %m", "%f=%l:%c: %tarning: %m", "%f=%l:%c: %tote: %m"},
+    lintSource = "mypy",
+    lintIgnoreExitCode = true,
+}
 
 lsp_installer.on_server_ready(function(server)
     local opts = {
@@ -58,14 +86,41 @@ lsp_installer.on_server_ready(function(server)
         },
         capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
         settings = {
-            python={formatting={provider="black"}}
+            -- python={formatting={provider="black"}}
         }
     }
 
     local config = load_local_config('.vim/lspconfig.json')
-    for k,v in pairs(config) do opts.settings[k] = v end
+    for k,v in pairs(config) do
+        opts.settings[k] = v
+    end
+
     opts.settings = config
-    -- print(vim.inspect(opts.python.pythonPath))
+    if server.name == "efm" then
+        opts = {
+            on_attach = on_attach,
+            flags = {
+                debounce_text_changes = 150,
+            },
+            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+            init_options = {documentFormatting = true},
+            filetypes = { "python", "lua"},
+            settings = {
+                rootMarkers = {".git/", "pyproject.toml"},
+                languages = {
+                    lua = {
+                        {formatCommand = "lua-format -i", formatStdin = true}
+                    },
+                    python = {
+                        {formatCommand = "poetry run isort --profile black --quiet -", formatStdin = true},
+                        {formatCommand = "poetry run black --quiet -", formatStdin = true},
+                        -- mypy,
+                        flake8
+                    }
+                }
+            }
+    }
+    end
     server:setup(opts)
 end)
 

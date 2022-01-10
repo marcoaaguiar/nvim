@@ -17,8 +17,8 @@ extensions = {
     }
 }
 require('telescope').load_extension('ultisnips')
-require('telescope').load_extension('neoclip')
-require('neoclip').setup()
+-- require('telescope').load_extension('neoclip')
+-- require('neoclip').setup()
 
 -- file finder mapping
 vim.api.nvim_set_keymap('n', ',e', '<cmd>Telescope find_files<cr>', {noremap = true})
@@ -58,4 +58,4 @@ vim.api.nvim_set_keymap('n', ',C', '<cmd>Telescope colorscheme<cr>', {noremap = 
 vim.api.nvim_set_keymap('n', ',k', '<cmd>Telescope keymaps<cr>', {noremap = true})
 
 -- Keymaps
-vim.api.nvim_set_keymap('n', ',y', '<cmd>Telescope neoclip<cr>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', ',y', '<cmd>Telescope neoclip<cr>', {noremap = true})

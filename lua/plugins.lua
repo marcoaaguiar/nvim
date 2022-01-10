@@ -69,11 +69,11 @@ return require('packer').startup(function(use)
         run = 'make'
     } -- TODO: is it properly configured?
     use 'fhill2/telescope-ultisnips.nvim'
-    use 'matveyt/neoclip' -- do i need this still?
-    use {
-        "AckslD/nvim-neoclip.lua",
-        requires = {'tami5/sqlite.lua', module = 'sqlite'},
-    } -- telescope yank
+    -- use 'matveyt/neoclip' -- do i need this still?
+    -- use {
+        -- "AckslD/nvim-neoclip.lua",
+        -- requires = {'tami5/sqlite.lua', module = 'sqlite'},
+    -- } -- telescope yank
 
     -- Completion from other opened files
     use 'Shougo/context_filetype.vim'
