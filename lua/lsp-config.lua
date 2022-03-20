@@ -115,7 +115,7 @@ lsp_installer.on_server_ready(function(server)
                         {formatCommand = "poetry run isort --profile black --quiet -", formatStdin = true},
                         {formatCommand = "poetry run black --quiet -", formatStdin = true},
                         -- mypy,
-                        flake8
+                        -- flake8
                     }
                 }
             }
