@@ -16,16 +16,16 @@
 -- autocmd FileType json syntax match Comment +\/\/.\+$+
 --   
 -- 
-local nightfox = require('nightfox')
+-- local nightfox = require('nightfox')
 
 -- This function set the configuration of nightfox. If a value is not passed in the setup function
 -- it will be taken from the default configuration above
-nightfox.setup({
+--[[ nightfox.setup({
   fox = "nordfox", -- change the colorscheme to use nordfox
   hlgroups = {
     TSPunctDelimiter = { fg = "${red}" }, -- Override a highlight group with the color red
     LspCodeLens = { bg = "#000000", style = "italic" },
   }
-})
+}) ]]
 
 vim.cmd[[colorscheme nightfox]]
