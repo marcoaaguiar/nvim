@@ -36,7 +36,7 @@ set scrolloff=4
 filetype plugin on 
 
 " GUI
-set guifont=CaskaydiaCove\ NF:h14
+set guifont=CaskaydiaCove\ NF:h12
 highlight link NormalFloat CursorColumn
 
 let g:python3_host_prog='~/.config/nvim/.venv/bin/python3'

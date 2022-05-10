@@ -1,5 +1,5 @@
 local lsp_installer = require("nvim-lsp-installer")
-local lspconfig = require 'lspconfig'
+local lspconfig = require('lspconfig')
 
 -- efm lang server
 --[[ lspconfig.efm.setup {

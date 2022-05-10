@@ -65,7 +65,7 @@ vim.api.nvim_set_keymap('v', '<C-N>', ':join!<CR>', {noremap = true, silent = tr
 
 
 -- Show highlight group for word under cursor
-vim.api.nvim_set_keymap('n', '<C-A-T>', ':call <SID>SynStack()<CR>', {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap('n', '<C-A-T>', ':call <SID>SynStack()<CR>', {noremap = true, silent = true})
 
 -- vim.api.nvim_set_keymap('v', '*', '"9y/\\V<C-r>9<CR>', {noremap = true, silent = true})
 
