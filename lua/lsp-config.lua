@@ -1,19 +1,12 @@
-local lsp_installer = require("nvim-lsp-installer")
-local lspconfig = require('lspconfig')
+local lspinstaller = require'nvim-lsp-installer'
+local lspconfig = require'lspconfig'
 
--- efm lang server
---[[ lspconfig.efm.setup {
-    init_options = {documentFormatting = true},
-    settings = {
-        rootMarkers = {".git/"},
-        languages = {
-            lua = {
-                {formatCommand = "lua-format -i", formatStdin = true}
-            }
-        }
-    }
-}
- ]]
+local configs = require('lspconfig/configs')
+local util = require('lspconfig/util')
+
+local path = util.path
+lspinstaller.setup{}
+
 local on_attach_keybind = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -43,7 +36,7 @@ end
 
 local on_attach = function (client, bufnr)
     on_attach_keybind(client, bufnr)
-    require("lsp_signature").on_attach({bind=true, handler_options={border = "rounded"}}, bufnr);
+    -- require("lsp_signature").on_attach({bind=true, handler_options={border = "rounded"}}, bufnr);
 end
 
 local function file_exists(file_name)
@@ -78,16 +71,17 @@ local mypy = {
     lintIgnoreExitCode = true,
 }
 
-lsp_installer.on_server_ready(function(server)
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+for _, server in ipairs(lspinstaller.get_installed_servers()) do
     local opts = {
         on_attach = on_attach,
         flags = {
             debounce_text_changes = 150,
         },
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        settings = {
-            -- python={formatting={provider="black"}}
-        }
+        capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
+        settings = {}
     }
 
     local config = load_local_config('.vim/lspconfig.json')
@@ -96,13 +90,14 @@ lsp_installer.on_server_ready(function(server)
     end
 
     opts.settings = config
+
     if server.name == "efm" then
         opts = {
             on_attach = on_attach,
             flags = {
                 debounce_text_changes = 150,
             },
-            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+            capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
             init_options = {documentFormatting = true},
             filetypes = { "python", "lua"},
             settings = {
@@ -115,56 +110,60 @@ lsp_installer.on_server_ready(function(server)
                         {formatCommand = "poetry run isort --profile black --quiet -", formatStdin = true},
                         {formatCommand = "poetry run black --quiet -", formatStdin = true},
                         -- mypy,
-                        -- flake8
+                        flake8
                     }
                 }
             }
-    }
+        }
+    --[[ elseif server.name=="pyright" then
+        opts.before_init = function(_, conf)
+            conf.settings.python.pythonPath = get_python_path(config.root_dir)
+        end ]]
     end
-    server:setup(opts)
-end)
+  require('lspconfig')[server.name].setup (opts)
+end
 
 
 local lspsaga = require 'lspsaga'
 lspsaga.setup { -- defaults ...
-  debug = false,
-  use_saga_diagnostic_sign = true,
-  -- diagnostic sign
-  error_sign = "",
-  warn_sign = "",
-  hint_sign = "",
-  infor_sign = "",
-  diagnostic_header_icon = "   ",
-  -- code action title icon
-  code_action_icon = " ",
-  code_action_prompt = {
-    enable = true,
-    sign = true,
-    sign_priority = 40,
-    virtual_text = true,
-  },
-  finder_definition_icon = "  ",
-  finder_reference_icon = "  ",
-  max_preview_lines = 10,
-  finder_action_keys = {
-    open = "o",
-    vsplit = "s",
-    split = "i",
-    quit = "q",
-    scroll_down = "<C-f>",
-    scroll_up = "<C-b>",
-  },
-  code_action_keys = {
-    quit = "q",
-    exec = "<CR>",
-  },
-  rename_action_keys = {
-    quit = "<C-c>",
-    exec = "<CR>",
-  },
-  definition_preview_icon = "  ",
-  border_style = "single",
-  rename_prompt_prefix = "➤",
-  server_filetype_map = {},
-  diagnostic_prefix_format = "%d. ",
+    debug = false,
+    use_saga_diagnostic_sign = true,
+    -- diagnostic sign
+    error_sign = "",
+    warn_sign = "",
+    hint_sign = "",
+    infor_sign = "",
+    diagnostic_header_icon = "   ",
+    -- code action title icon
+    code_action_icon = " ",
+    code_action_prompt = {
+        enable = true,
+        sign = true,
+        sign_priority = 40,
+        virtual_text = true,
+    },
+    finder_definition_icon = "  ",
+    finder_reference_icon = "  ",
+    max_preview_lines = 10,
+    finder_action_keys = {
+        open = "o",
+        vsplit = "s",
+        split = "i",
+        quit = "q",
+        scroll_down = "<C-f>",
+        scroll_up = "<C-b>",
+    },
+    code_action_keys = {
+        quit = "q",
+        exec = "<CR>",
+    },
+    rename_action_keys = {
+        quit = "<C-c>",
+        exec = "<CR>",
+    },
+    definition_preview_icon = "  ",
+    border_style = "single",
+    rename_prompt_prefix = "➤",
+    server_filetype_map = {},
+    diagnostic_prefix_format = "%d. ",
 }
