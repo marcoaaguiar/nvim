@@ -51,13 +51,34 @@ require("lazy").setup({
 		event = "InsertEnter",
 	},
 	-- Surround/basics/more
-	{'echasnovski/mini.nvim', version = '*'},
+	{ 'echasnovski/mini.nvim', version = '*' },
 	-- gits sign
 	'lewis6991/gitsigns.nvim',
-	'nvim-treesitter/nvim-treesitter',
-	'nvim-lualine/lualine.nvim',
+	-- tree sitter
+	{
+		'nvim-treesitter/nvim-treesitter',
+		build = ":TSUpdate",
+		config = function()
+			require('nvim-treesitter.configs').setup {
+				highlight = { enabled = true }
+			}
+		end
+	},
+	-- status line
+	{
+		'nvim-lualine/lualine.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' }
+	},
+	'lambdalisue/nerdfont.vim',
+	-- telescope
+	{
+		'nvim-telescope/telescope.nvim',
+		tag = '0.1.5',
+		dependencies = { 'nvim-lua/plenary.nvim' }
+	},
+	-- tabline
+	{'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
 	'akinsho/toggleterm.nvim',
-	"nvim-telescope/telescope.nvim",
 	'kyazdani42/nvim-tree.lua',
 	'rmagatti/auto-session',
 	"norcalli/nvim-colorizer.lua",
@@ -178,7 +199,7 @@ cmp.setup.cmdline(':', {
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['lua ls'].setup {
+require('lspconfig')['lua_ls'].setup {
 	capabilities = capabilities
 }
 
@@ -189,3 +210,26 @@ require('mini.surround').setup()
 
 -- git signs
 require('gitsigns').setup()
+
+-- status line
+require('lualine').setup {}
+
+-- telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>ft', builtin.tags, {})
+vim.keymap.set('n', '<leader>fc', builtin.colorscheme, {})
+vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
+--> look into lsp telescopes
+
+-- tabline
+vim.opt.termguicolors = true
+require("bufferline").setup{}
+
+-- Misc
+-- colorize color hexes
+require('colorizer').setup()
+
