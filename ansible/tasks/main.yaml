@@ -73,3 +73,15 @@
       community.general.snap:
         name: nvim
         classic: yes
+
+    - name: Install xclip
+      become: true
+      ansible.builtin.package:
+        state: present
+        name: xclip
+
+    - name: Install stow
+      become: true
+      ansible.builtin.package:
+        state: present
+        name: stow
