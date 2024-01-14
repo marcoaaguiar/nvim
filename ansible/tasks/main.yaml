@@ -85,3 +85,16 @@
       ansible.builtin.package:
         state: present
         name: stow
+
+    - name: Install nvm
+      ansible.builtin.shell: >
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+      args:
+        creates: "{{ ansible_env.HOME }}/.config/nvm/nvm.sh"
+
+    - name: Install Node.js
+      shell: '. {{ ansible_env.HOME }}/.config/nvm/nvm.sh && nvm install node'
+      args:
+        creates: "{{ ansible_env.HOME }}/.config/nvm/versions/node"
+        chdir: "{{ ansible_env.HOME }}"
+        executable: /bin/bash

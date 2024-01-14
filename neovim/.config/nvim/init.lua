@@ -11,10 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 -- Example using a list of specs with the default options
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
-
 
 require("lazy").setup({
 	-- colorscheme/theme
@@ -42,6 +40,7 @@ require("lazy").setup({
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-path',
 	'hrsh7th/cmp-cmdline',
+	'saadparwaiz1/cmp_luasnip',
 	"hrsh7th/nvim-cmp",
 	-- Comment
 	'numToStr/Comment.nvim',
@@ -51,7 +50,7 @@ require("lazy").setup({
 		event = "InsertEnter",
 	},
 	-- Surround/basics/more
-	{ 'echasnovski/mini.nvim', version = '*' },
+	{ 'echasnovski/mini.nvim',   version = '*' },
 	-- gits sign
 	'lewis6991/gitsigns.nvim',
 	-- tree sitter
@@ -77,22 +76,65 @@ require("lazy").setup({
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
 	-- tabline
-	{'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
-	'akinsho/toggleterm.nvim',
+	{ 'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
+	-- terminal
+	{ 'akinsho/toggleterm.nvim', version = "*", keys = "<C-t>",                              opts = { open_mapping = "<C-t>" } },
+	-- snippets
+	{
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp"
+	},
+	-- filesystem
 	'kyazdani42/nvim-tree.lua',
+
+	-- sesion
 	'rmagatti/auto-session',
+	{
+		'rmagatti/session-lens',
+		requires = { 'rmagatti/auto-session', 'nvim-telescope/telescope.nvim' },
+		config = function()
+			require('session-lens').setup({ --[[your custom config--]] })
+		end
+	},
+	-- 'AndrewRadev/sideways.vim',
+	-- Colorize #hex color
 	"norcalli/nvim-colorizer.lua",
-	'AndrewRadev/sideways.vim',
+	-- task (like vscode)
+	'stevearc/overseer.nvim',
 })
 
-
 -- Basic
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.cmd [[colorscheme tokyonight]]
 vim.wo.number = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.mouse = 'a'
-vim.opt.clipboard = "unnamedplus"
+
+-- -- open file at last position
+-- vim.api.nvim_create_autocmd('BufRead', {
+--   callback = function(opts)
+--     vim.api.nvim_create_autocmd('BufWinEnter', {
+--       once = true,
+--       buffer = opts.buf,
+--       callback = function()
+--         local ft = vim.bo[opts.buf].filetype
+--         local last_known_line = vim.api.nvim_buf_get_mark(opts.buf, '"')[1]
+--         if
+--           not (ft:match('commit') and ft:match('rebase'))
+--           and last_known_line > 1
+--           and last_known_line <= vim.api.nvim_buf_line_count(opts.buf)
+--         then
+--           vim.api.nvim_feedkeys([[g`"]], 'nx', false)
+--         end
+--       end,
+--     })
+--   end,
+-- })
 
 -- Comment
 require("Comment").setup({ mappings = { basic = true, extra = false } })
@@ -138,20 +180,55 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
 		vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
 		vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-		vim.keymap.set('n', '<space>f', function()
+		vim.keymap.set('n', '<space>ff', function()
 			vim.lsp.buf.format { async = true }
 		end, opts)
 	end,
 })
 
 -- Completion
-local cmp = require('cmp')
+local has_words_before = function()
+	unpack = unpack or table.unpack
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local luasnip = require("luasnip")
+local cmp = require("cmp")
+
 cmp.setup({
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body) -- For `luasnip` users.
+		end,
+	},
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert({
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.get_selected_entry() ~= nil then
+				cmp.select_next_item()
+				-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+				-- that way you will only jump inside the snippet region
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif has_words_before() then
+				cmp.complete()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
@@ -161,13 +238,14 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		-- { name = 'vsnip' }, -- For vsnip users.
-		-- { name = 'luasnip' }, -- For luasnip users.
+		{ name = 'luasnip' }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
 	}, {
 		{ name = 'buffer' },
 	})
 })
+
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
@@ -216,20 +294,55 @@ require('lualine').setup {}
 
 -- telescope
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>ft', builtin.tags, {})
-vim.keymap.set('n', '<leader>fc', builtin.colorscheme, {})
-vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
+vim.keymap.set('n', '<leader>tf', builtin.find_files, {})
+vim.keymap.set('n', '<leader>ts', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>tb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>tt', builtin.tags, {})
+vim.keymap.set('n', '<leader>tc', builtin.colorscheme, {})
+vim.keymap.set('n', '<leader>td', builtin.diagnostics, {})
+vim.keymap.set('n', '<leader>tk', builtin.keymaps, {})
+vim.keymap.set('n', '<leader>tr', "<cmd> SearchSession <CR>", {})
 --> look into lsp telescopes
 
 -- tabline
 vim.opt.termguicolors = true
-require("bufferline").setup{}
+require("bufferline").setup()
+
+vim.keymap.set('n', '<A-.>', "<cmd> BufferLineCycleNext <CR>", {})
+vim.keymap.set('n', '<A-,>', "<cmd> BufferLineCyclePrev <CR>", {})
+vim.keymap.set("n", "<A-s-.>", "<cmd> BufferLineMoveNext <CR>") --"  cycle next buffer"
+vim.keymap.set("n", "<A-s-,>", "<cmd> BufferLineMovePrev <CR>") --"  cycle prev buffer"
+vim.keymap.set("n", "<A-f>", "<cmd> BufferLinePick <CR>")
+vim.keymap.set("n", "<A-w>", "<cmd> bp|sp|bn|bd! <CR>")         --"	close buffer"
+for i = 1, 9 do
+	-- map("n", "<A-" .. i .. ">", function() require("bufferline").go_to_buffer(i) end)
+	vim.keymap.set("n", "<A-" .. i .. ">", "<cmd>" .. i .. "tabn<CR>")
+end
+
+-- filesystem
+require("nvim-tree").setup { update_focused_file = { enable = true } }
+
+vim.keymap.set("n", "<space>fc", "<cmd> NvimTreeClose <CR>")
+vim.keymap.set("n", "<space>ft",
+	function()
+		if require('nvim-tree.api').tree.is_tree_buf() then
+			vim.cmd("NvimTreeClose")
+		else
+			return vim.cmd("NvimTreeFindFile")
+		end
+	end)
+
+-- session
+require('auto-session').setup {
+	log_level = "error",
+	auto_session_suppress_dirs = { "~/", "~/Projects", },
+}
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+-- Tasks
+require('overseer').setup()
 
 -- Misc
 -- colorize color hexes
 require('colorizer').setup()
-
