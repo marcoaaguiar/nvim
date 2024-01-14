@@ -78,7 +78,12 @@ require("lazy").setup({
 	-- tabline
 	{ 'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
 	-- terminal
-	{ 'akinsho/toggleterm.nvim', version = "*", keys = "<C-t>",                              opts = { open_mapping = "<C-t>" } },
+	{
+		'akinsho/toggleterm.nvim',
+		version = "*",
+		keys = "<C-t>",
+		opts = { open_mapping = "<C-t>" },
+	},
 	-- snippets
 	{
 		"L3MON4D3/LuaSnip",
@@ -104,6 +109,9 @@ require("lazy").setup({
 	"norcalli/nvim-colorizer.lua",
 	-- task (like vscode)
 	'stevearc/overseer.nvim',
+	-- copilot
+	'zbirenbaum/copilot.lua',
+	{ 'AndreM222/copilot-lualine' },
 })
 
 -- Basic
@@ -114,6 +122,7 @@ vim.wo.number = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.mouse = 'a'
+vim.opt.mousescroll = 'ver:30,hor:6'
 
 -- -- open file at last position
 -- vim.api.nvim_create_autocmd('BufRead', {
@@ -212,7 +221,9 @@ cmp.setup({
 				cmp.select_next_item()
 				-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
 				-- that way you will only jump inside the snippet region
-			elseif luasnip.expand_or_jumpable() then
+			elseif require("copilot.suggestion").is_visible() then
+				require("copilot.suggestion").accept()
+			elseif luasnip.expand_or_locally_jumpable() then
 				luasnip.expand_or_jump()
 			elseif has_words_before() then
 				cmp.complete()
@@ -290,7 +301,11 @@ require('mini.surround').setup()
 require('gitsigns').setup()
 
 -- status line
-require('lualine').setup {}
+require('lualine').setup {
+	sections = {
+		lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype' }, -- I added copilot here
+	},
+}
 
 -- telescope
 local builtin = require('telescope.builtin')
@@ -343,6 +358,14 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 -- Tasks
 require('overseer').setup()
 
+-- Copilot
+require('copilot').setup {
+	suggestion = {
+		auto_trigger = true
+	}
+}
+
+vim.keymap.set('n', '<leader>cc', "<cmd> Copilot panel<CR>", {})
 -- Misc
 -- colorize color hexes
 require('colorizer').setup()
